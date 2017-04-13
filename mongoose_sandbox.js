@@ -38,6 +38,7 @@ db.once("open", function(){
     });
     
     AnimalSchema.statics.findSmall = function(callback){
+        // this will === animal
         return this.find({size: "small"}, callback);
     };
     
@@ -83,7 +84,7 @@ db.once("open", function(){
             Animal.create(animalData, function(err, animals){
                             if (err) console.log("Save failed.", err);
                             
-                            Animal.find({}, function(err, animals){ //search for big animals.s
+                            Animal.findSmall({}, function(err, animals){ //search for big animals.s
                                 if (err) console.log("Search failed.", err);
                                 animals.forEach(function(animal){
                                     console.log(animal.name + " the " + animal.color + " " + animal.type+ " is a " + animal.size + "-size animal.");
@@ -100,3 +101,16 @@ db.once("open", function(){
 }); // you can avoid these types of problems by nesting callback functions. But it's not actually a good idea. Promises can also help.
 
 //We have a Pyramid of DOOOOM.
+
+
+
+// Complete way of using find method: 
+// apiRouter.get("/", function(req, res, next){
+//     Topic.find({}, null, {sort: {createdAt: -1}}, function(err, questions){
+//         //above parameters are find, limit (null here), sort parameter, callback
+        
+//         //handle errors
+//         if (err) return next(err);
+//         res.json(questions); //because we're directly returning javaScript objects, we can drop it into the json function
+        
+//     });

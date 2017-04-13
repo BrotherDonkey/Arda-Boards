@@ -2,7 +2,7 @@
 
 var express = require("express");
 var bodyParser = require("body-parser");
-// var jsonParser = require("body-parser").json; //subset of bodyParser
+var jsonParser = require("body-parser").json; //subset of bodyParser
 var mongoose = require("mongoose");
 var session = require("express-session");
 var MongoStore = require("connect-mongo")(session); //pass session as argument, allows middleware to access session
@@ -11,6 +11,9 @@ var routes = require("./routes/index"); //include routes file
 var apiRouter = require("./routes/apiRouter"); //include routes for API
 var logger = require("morgan");
 
+// parse incoming requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // mongodb connection
 mongoose.connect("mongodb://" + process.env.IP + ":27017/arda");
@@ -51,9 +54,7 @@ app.use(function(req, res, next){
 });
 
 
-// parse incoming requests
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // //check if json available from the req.body property.
 // app.use(function(req, res, next) {

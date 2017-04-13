@@ -32,7 +32,7 @@ CommentSchema.method("update", function(updates, callback){
 
 
 var TopicSchema = new Schema({
-    text: String,
+    text: {type: String, default: "string not saved"},
     createdAt: {type: Date, default: Date.now },
     comments: [CommentSchema], //place Comment Schema as the only element in this array, as a signal to Mongo that they're related.
     author: {type: String, default: "anonymous"}
@@ -52,7 +52,7 @@ var Topic = mongoose.model("Topic", TopicSchema);
 
 // var Comment = mongoose.model("Comment", CommentSchema);
 
-module.exports.Topic = Topic;
-
+module.exports = Topic;
+// module.exports = mongoose.model('Topic', TopicSchema);
 //import
 
