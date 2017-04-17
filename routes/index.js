@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var API = require('../models/APImodels'); //added to reference API
 var mid = require('../middleware');
 
 // GET /profile
@@ -132,5 +133,29 @@ router.get('/about', function(req, res, next) {
 router.get('/contact', function(req, res, next) {
   return res.render('contact', { title: 'Discussion Boards' });
 });
+
+
+//GET /rivendell where eventually a long list of discussion topics will be shown.
+router.get('/rivendell', function(req, res, next) {
+   if (!req.session.userId) {
+      return res.redirect('/login');
+   } else {
+     
+  var topicsCall = API.find();
+  console.log(JSON.stringify(topicsCall));
+  
+  ////STARTING TOMORROW FIGURE OUT HOW TO CALL THE API AND PROPAGATE THIS SHIT.
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter });
+        }
+      });
+   }
+});
+
 
 module.exports = router;
