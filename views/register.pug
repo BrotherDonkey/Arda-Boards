@@ -22,7 +22,8 @@ block content
             input#favoriteBook.form-control(type='text', placeholder='Glorfindel?' name='favoriteCharacter')
           div.form-group
             label(for='pw') Password:
-            input#pw.form-control(type='password' name='password')
+            p Minimum 8 characters at least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character. 
+            input#pw.form-control(type='password' name='password' pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}")
           div.form-group
             label(for='pw2') Confirm Password:
             input#pw2.form-control(type='password' name='confirmPassword')

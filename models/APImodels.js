@@ -2,8 +2,9 @@
 
 var mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
 //store Schema contructor as a local variable
+var Schema = mongoose.Schema;
+
 
 // function for sorting comments
 var sortComments = function(a, b) {
@@ -28,7 +29,16 @@ CommentSchema.method("update", function(updates, callback){
     // Object.assign
     Object.assign(this, updates, {updatedAt: new Date()});
     this.parent().save(callback);
-})
+})//this will be the key to up and downvoting
+
+CommentSchema.method("vote", function(vote, callback){
+    if (vote === "up") {
+        this.votes += 1;
+    } else {
+        this.votes -= 1;
+    }
+    this.parent().save(callback);
+});
 
 
 var TopicSchema = new Schema({

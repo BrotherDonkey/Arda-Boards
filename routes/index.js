@@ -75,6 +75,10 @@ router.post('/register', function(req, res, next) {
       req.body.password &&
       req.body.confirmPassword) {
         
+        //check to make sure that the password contains one alpha, one num, one special
+        //"^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"
+        
+        
         //confirm that user typed same password twice
         if( req.body.password !== req.body.confirmPassword) {
           var err = new Error("Passwords do not match");
@@ -115,6 +119,7 @@ router.post('/register', function(req, res, next) {
 
 // GET /
 router.get('/', function(req, res, next) {
+  // if (req.session) {console.log(req.session)} else {console.log("No req.session.userId")};
   return res.render('index', { title: 'Home' });
 });
 

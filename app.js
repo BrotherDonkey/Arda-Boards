@@ -2,7 +2,7 @@
 
 var express = require("express");
 var bodyParser = require("body-parser");
-var jsonParser = require("body-parser").json; //subset of bodyParser
+// var jsonParser = require("body-parser").json; //subset of bodyParser
 var mongoose = require("mongoose");
 var session = require("express-session");
 var MongoStore = require("connect-mongo")(session); //pass session as argument, allows middleware to access session
@@ -36,6 +36,18 @@ app.use(session({
 
 //Morgan gives color status codes for Routes and Responses.
 app.use(logger("dev"));
+
+//CORS - setting up API to be used publicly from web browser.
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     if (req.method === "OPTIONS") {
+//       res.header("Access-Control-Allow-Methods", "PUT, POST, DELETE");
+//       return res.status(200).json({});
+//     }
+//     next();
+// });
+
 
 //TEST
 //topics API route,

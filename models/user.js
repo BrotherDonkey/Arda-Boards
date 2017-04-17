@@ -59,6 +59,9 @@ UserSchema.statics.authenticate = function(username, password, callback){
 UserSchema.pre('save', function(next){
    //middleware processes input as it's passed through a chain of commands --
    var user = this; //refers to object created with user information
+   
+   //include validation here?
+   
    bcrypt.hash(user.password, 10, function(err, hash){
        //replace
        if (err) {

@@ -133,9 +133,9 @@ apiRouter.post("/:tID/comments/:cID/vote-:dir",
     }, 
     
     function(req, res, next){
-            console.log("Comment"+req.comment.votes);
+            // console.log("Comment"+ req.comment.vote);
             // console.log("Question found!");
-            req.comment.votes.save(req.vote, function(err, topic){
+            req.comment.vote(req.vote, function(err, topic){
                 if (err) return next(err);
                 res.json(topic);
             });
