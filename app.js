@@ -10,7 +10,6 @@ var app = express();
 var routes = require("./routes/index"); //include routes file
 var apiRouter = require("./routes/apiRouter"); //include routes for API
 var logger = require("morgan");
-var request = require("request"); //for getting api calls
 
 // parse incoming requests
 app.use(bodyParser.json());

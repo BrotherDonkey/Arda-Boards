@@ -1,10 +1,15 @@
 'use strict';
 
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
-var API = require('../models/APImodels'); //added to reference API
-var mid = require('../middleware');
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user');
+const Topic = require('../models/APImodels'); //added to reference API
+const mid = require('../middleware');
+const request = require("request");
+const port = process.env.PORT || 3000;
+const  http = require('http');
+const https = require('https');
+
 
 // GET /profile
 router.get('/profile', mid.requiresLogin, function(req, res, next) {
@@ -19,7 +24,6 @@ router.get('/profile', mid.requiresLogin, function(req, res, next) {
 });
 
 // GET /logout
-
 router.get('/logout', function(req, res, next) {
     if (req.session) {
       // delete session object
@@ -140,18 +144,20 @@ router.get('/rivendell', function(req, res, next) {
    if (!req.session.userId) {
       return res.redirect('/login');
    } else {
-     
-  var topicsCall = API.find();
-  console.log(JSON.stringify(topicsCall));
-  
-  ////STARTING TOMORROW FIGURE OUT HOW TO CALL THE API AND PROPAGATE THIS SHIT.
+
+
+
+   ////STARTING TOMORROW FIGURE OUT HOW TO CALL THE API AND PROPAGATE THIS SHIT.
      
    User.findById(req.session.userId)
       .exec(function (error, user) {
         if (error) {
           return next(error);
         } else {
-          return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter });
+          
+      //just fucking hook up angular . . . meaning take down jade . . .
+
+          return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter, print: print });
         }
       });
    }
