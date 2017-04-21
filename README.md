@@ -17,3 +17,7 @@ http://mongoosejs.com/docs/promises.html
 
 Problem involving a bad shutdown:
 https://docs.mongodb.com/manual/tutorial/recover-data-following-unexpected-shutdown/
+
+Integrating Angular into Pug templates:
+https://codepen.io/khilnani/pen/GKcwD
+https://glebbahmutov.com/blog/angularjs-inside-jade-templates/

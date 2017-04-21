@@ -155,8 +155,6 @@ router.get('/rivendell', function(req, res, next) {
           return next(error);
         } else {
           
-      //just fucking hook up angular . . . meaning take down jade . . .
-
           return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter, print: print });
         }
       });

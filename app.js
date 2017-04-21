@@ -15,6 +15,7 @@ var logger = require("morgan");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 // mongodb connection
 mongoose.connect("mongodb://" + process.env.IP + ":27017/arda");
 var db = mongoose.connection;
@@ -90,6 +91,8 @@ app.use(express.static(__dirname + "/public"));
 // view engine setup
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
+
+
 
 // include routes
 app.use('/', routes);
