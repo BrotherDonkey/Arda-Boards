@@ -97,6 +97,9 @@ app.set("views", __dirname + "/views");
 // include routes
 app.use('/', routes);
 
+//include static files within the public folder:
+app.use(express.static('public'));
+
 // catch 404 and forward to error handler (MW)
 app.use(function(req, res, next) {
   var err = new Error("File Not Found");

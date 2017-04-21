@@ -144,10 +144,6 @@ router.get('/rivendell', function(req, res, next) {
    if (!req.session.userId) {
       return res.redirect('/login');
    } else {
-
-
-
-   ////STARTING TOMORROW FIGURE OUT HOW TO CALL THE API AND PROPAGATE THIS SHIT.
      
    User.findById(req.session.userId)
       .exec(function (error, user) {
@@ -155,7 +151,7 @@ router.get('/rivendell', function(req, res, next) {
           return next(error);
         } else {
           
-          return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter, print: print });
+          return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter });
         }
       });
    }
