@@ -1,20 +1,32 @@
 extends layout
 
 block content
-  .main.container.clearfix
-    .row
-      .col-md-8.col-md-offset-2
-        h1.display-4
-          img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='avatar')
-          | #{name}
-        h2.favorite-book Favorite Character
-        | #{favoriteChar}
-        p This is the Rivendell page.
-        | #{print}
-        
-        h1.display-4.m-b-2 Discuss lore
-        p Create a new topic that all the inquiring minds of the realm, clever and otherwise, might bask in the collective light of Ardan knowledge.
-            form(method="POST" action="/topics")
-  div(ng-app="ardaApp").main.container.clearfix
-    .row
-      .col-md-8.col-md-offset-2(ng-controller="NAME")              
+  div(ng-app="ardaApp")
+    .main.container.clearfix
+      .row
+        .col-md-8.col-md-offset-2
+          h2 Welcome to Rivendell.
+          h3.display-4.m-y-4 Discuss lore
+          // p Create a new topic that all the inquiring minds of the realm, clever and otherwise, might bask in the collective light of Ardan knowledge.
+          //     form(method="POST" action="/topics")
+      div(ng-controller="TopicsController as topics").main.container.clearfix
+        .row 
+          // p {{topics.list}}
+          div(ng-repeat="item in list").col-md-8.col-md-offset-2.card
+            div.card-block.text-muted
+              h5.card-title.text-primary.card-header {{item.title}}
+              p.glyphicon.glyphicon-fire
+              p.card-text {{item.text}}
+              button.btn.btn-link {{item.author}}
+              h6.m-y-1.text-primary Comments:
+              button.btn.btn-primary.m-y-1 Add a comment
+              hr
+              div(ng-repeat="comment in item.comments").m-y-1.card-footer
+                
+                p Votes: {{comment.votes}}
+                span.glyphicon.glyphicon-user
+                p {{comment.text}} 
+                button.btn.btn-link - {{comment.author}}
+                hr
+            div
+            p End repeat.

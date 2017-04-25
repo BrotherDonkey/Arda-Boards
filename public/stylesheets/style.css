@@ -1,5 +1,10 @@
 
 /* Base Styles */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
 
 body {
 	background: #1d2a33 url('../images/bg.jpg') no-repeat;
@@ -156,3 +161,6 @@ a:hover {
 	}
 }
 
+/*h5,h6,p grey-text {*/
+/*	color: black;*/
+/*}*/
