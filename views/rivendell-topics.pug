@@ -14,19 +14,48 @@ block content
           // p {{topics.list}}
           div(ng-repeat="item in list").col-md-8.col-md-offset-2.card
             div.card-block.text-muted
-              h5.card-title.text-primary.card-header {{item.title}}
+              hr
+              h4.card-title.text-primary.card-header {{item.title}}
+              hr
               p.glyphicon.glyphicon-fire
               p.card-text {{item.text}}
               button.btn.btn-link {{item.author}}
-              h6.m-y-1.text-primary Comments:
-              button.btn.btn-primary.m-y-1 Add a comment
+              h5.m-y-1.text-primary {{item.comments.length}} Comments:
               hr
-              div(ng-repeat="comment in item.comments").m-y-1.card-footer
-                
-                p Votes: {{comment.votes}}
-                span.glyphicon.glyphicon-user
-                p {{comment.text}} 
-                button.btn.btn-link - {{comment.author}}
+              // button.btn.btn-primary.m-y-1 Add a comment
+              div
+               a.btn.btn-primary(data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample") Add a new comment
+               buttonclass.btn.btn-primary(type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample") Collapse
+              div#collapseExample.collapse
+               .card.card-block
+                form
+                  div.form-group
+                    label(for="formGroupExampleInput") Example label
+                    input(type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input")
+                  div.form-group
+                    label(for="formGroupExampleInput") Example label
+                    textarea(type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input")
+            //accordian
+            #accordion(role="tablist" aria-multiselectable="true") 
+             .card
+              .card-header(role="tab" id="headingOne")
+                h5.mb-0
+                  a(data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne")
+                    Collapsible Group Item #1
+              //starting place Wed
+              <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="card-block">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                  </div>
+              </div>
+              //starting place Wed
+              
+              div(ng-repeat="comment in item.comments").m-y-1.card-footer.card.card-block
+                p.text-primary {{comment.text}}
+                p.text-success {{comment.votes}} votes
+                  i.text-success.icn-logo.material-icons whatshot
+                button.btn.btn-primary.btn-sm - {{comment.author}}
                 hr
+                
             div
             p End repeat.

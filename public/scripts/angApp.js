@@ -53,7 +53,25 @@
         apiService.getTopics(function(response){
                 console.log(response.data);
                 $scope.list = response.data;
-        }); 
+        });
+        
+        //post topic
+        $scope.postTopic = function(item){
+            apiService.postTopic(item);
+        };
+        
+        // post comment
+        $scope.postComment = function(item){
+            apiService.postComment(item);
+        };
+        
+        //delete comment
+        $scope.deleteComment = function(item){
+            apiService.deleteComment(item);
+        };
+        
+        
+        
     })//end app controller
     .service('apiService', function($http){
         this.helloworld = function(){
@@ -64,6 +82,24 @@
             $http.get('https://fdy-brotherdonkey.c9users.io/topics/') //can dynamically insert topics?
             .then(callback);
         }
+        
+        //for adding new topics to the api
+        this.postTopic = function(callback){
+            console.log('posted a new topic');
+        }
+        
+        //for adding comments to topics
+        this.postComment = function(callback){
+            console.log('post in a new comment');
+        }
+        
+        this.deleteComment = function(callback){
+            console.log("delete a comment")
+        }
+        
+        //
+        
+        
     }) // apiService end
         
         
