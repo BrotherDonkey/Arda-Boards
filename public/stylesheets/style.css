@@ -8,7 +8,7 @@
 
 body {
 	background: #1d2a33 url('../images/bg.jpg') no-repeat;
-	background-size: cover; 
+	/*background-size: cover; */
 }
 
 a:hover {

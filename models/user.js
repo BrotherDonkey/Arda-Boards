@@ -25,6 +25,12 @@ var UserSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    profileImage: {
+        type:String,
+        required: true,
+        trim: true,
+        default: "/public/images/avatar.png"
+    },
     password: {
         type: String,
         required: true

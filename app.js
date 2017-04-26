@@ -52,7 +52,7 @@ app.use(logger("dev"));
 
 //TEST
 //topics API route,
-app.use("/topics", apiRouter);
+app.use("/api-topics", apiRouter);
 
 // //simple test middleware for API, note: the colon below is only to add something to the req.params.WHATEVER object
 // app.use("/hello/:id", function(req, res, next){

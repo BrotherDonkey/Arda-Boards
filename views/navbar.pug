@@ -12,11 +12,14 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
         a.nav-item.nav-link(href='contact') Boards
         a.nav-item.nav-link(href='rivendell') Rivendell
         a.nav-item.nav-link(href='profile') My Profile
+        
       if currentUser
-        div
+        a(href='profile')
           img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='user icon')
-          | Current User
-          a.btn.btn-light.pull-md-right(href='/logout') Log out
+        a(href='profile')
+        .btn-group.btn-group-sm(role="group" aria-label="Basic example")
+          a(type="button" href='/profile').btn.btn-primary #{name}
+          a(type="button" href='/logout').btn.btn-secondary Log out
       else
         a.btn.btn-info.pull-md-right(href='login') Login
 

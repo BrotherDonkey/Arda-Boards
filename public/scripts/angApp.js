@@ -5,51 +5,8 @@
           "text": "hello, world!"
         };
         
-    var list = [{
-            "_id" : "58efe20c59d29140e01a21af",
-            "author" : "Peter",
-            "comments" : [
-                    {
-                            "text" : "Yeah, we know, man.",
-                            "_id" : "58efe3d259d29140e01a21b1",
-                            "votes" : 6,
-                            "author" : "Huy",
-                    },
-                    {
-                            "text" : "I live PB and H",
-                            "_id" : "58efe39359d29140e01a21b0",
-                            "votes" : 8,
-                            "author" : "Will",
-                    }
-            ],
-            "text" : "I love peanutbutter and honey sandwiches!",
-            "__v" : 30
-        },
-        {
-            "_id" : "58efe20c59d29140e01a21af",
-            "author" : "Peter",
-            "comments" : [
-                    {
-                            "text" : "Yeah, we know, man.",
-                            "_id" : "58efe3d259d29140e01a21b1",
-                            "votes" : 6,
-                            "author" : "Huy",
-                    },
-                    {
-                            "text" : "I live PB and H",
-                            "_id" : "58efe39359d29140e01a21b0",
-                            "votes" : 8,
-                            "author" : "Will",
-                    }
-            ],
-            "text" : "I love peanutbutter and honey sandwiches!",
-            "__v" : 30
-        }]; //end mockTopic
-        
     App.controller('TopicsController', function($scope, apiService){
-        // $scope.list = list; 
-        $scope.mock = mock;
-        
+
         apiService.getTopics(function(response){
                 console.log(response.data);
                 $scope.list = response.data;
@@ -66,10 +23,15 @@
         };
         
         //delete comment
-        $scope.deleteComment = function(item){
+        $scope.deleteComment = function(item, $index){
             apiService.deleteComment(item);
+            $scope.list.splice($index);
+            
         };
         
+        $scope.editComment = function(item, $index) {
+            apiService.editComment(item);
+        };
         
         
     })//end app controller
@@ -79,7 +41,7 @@
         };
         
         this.getTopics = function(callback){
-            $http.get('https://fdy-brotherdonkey.c9users.io/topics/') //can dynamically insert topics?
+            $http.get('https://fdy-brotherdonkey.c9users.io/api-topics/') //can dynamically insert topics?
             .then(callback);
         }
         
@@ -100,8 +62,15 @@
         //
         
         
-    }) // apiService end
-        
+    });
+    
+    
+    App.directive("topicAndComments", function(){
+       return {
+         restrict: "E",
+         templateUrl: 'views/topicAndComments.pug'
+       };
+    });
         
         
     // });//controller end
