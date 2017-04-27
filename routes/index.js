@@ -130,12 +130,40 @@ router.get('/', function(req, res, next) {
 
 // GET /about
 router.get('/about', function(req, res, next) {
-  return res.render('about', { title: 'Fan Art' });
+  if (!req.session.userId) {
+      var loggedIn = false;
+      return res.render('about', { title: 'Fan Art', loggedIn: loggedIn });
+   } else {
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          
+          return res.render('about', { title: 'Fan Art', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn });
+        }
+      });
+   }
 });
 
 // GET /contact /questions /topics ????
 router.get('/contact', function(req, res, next) {
-  return res.render('contact', { title: 'Discussion Boards' });
+  if (!req.session.userId) {
+      var loggedIn = false;
+      return res.render('contact', { title: 'Discussion Boards', loggedIn: loggedIn });
+   } else {
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          
+          return res.render('contact', { title: 'Discussion Boards', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn });
+        }
+      });
+   }
 });
 
 
