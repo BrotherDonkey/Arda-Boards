@@ -2,8 +2,7 @@
 
 
         
-    App.controller('TopicsController', function($scope, apiService){
-        
+    App.controller('TopicsController', function($http, $scope, apiService){
         
         $scope.user = document.getElementById('profile-name').innerText;
         $scope.date = new Date();
@@ -11,15 +10,19 @@
             "date": $scope.date,
             "author": $scope.user
         };
-
         
+        // FUNCTION FOR GET REQUESTS TO GET TOPICS
+        apiService.getTopics(function(response){
+                // console.log(response.data);
+                $scope.list = response.data;
+                
+        });
+        
+        
+        // FUNC FOR POST ROUTE -- MAKE NEW TOPICS
         $scope.submitTopic = function(item) {
             if (item.text && item.title) {
-                console.dir(item);
-                console.dir("submitted:" + item);
-            //   $scope.list.push(this.text);
-            //   $scope.text = '';
-            
+                apiService.postTopic(function(){}, item);
                 $scope.newTopic = {};
                 
             } else {
@@ -27,23 +30,41 @@
                 var error = "Form incomlete";
                 console.error(error);
             }
+            item = {};
+            
+            //reload the page after post -- could also attach $scope.getTopics to this somehow.
+            window.location.reload();
+        };
+        
+         // post comment
+        $scope.postComment = function(item){
+            if (item.text && item.topicId) {
+                console.log(item.topicId)
+                apiService.postComment(function(){}, item, item.topicId);
+                $scope.newTopic = {};
+                
+                } else {
+                var error = new Error();
+                var error = "Form incomlete";
+                console.error(error);
+            }
             
             item = {};
+            
+            //reload the page after post -- could also attach $scope.getTopics to this somehow. NEED A NEW ONE
+            window.location.reload();
+            
+            // apiService.postComment(item);
+            
+            
         };
         
-        apiService.getTopics(function(response){
-                console.log(response.data);
-                $scope.list = response.data;
-        });
-        
-        //post topic
+        //post topic --see submit topic
         $scope.postTopic = function(item){
             apiService.postTopic(item);
-        };
-        
-        // post comment
-        $scope.postComment = function(item){
-            apiService.postComment(item);
+            
+            
+            // newComment .topicId .author .text
         };
         
         //delete comment
@@ -73,13 +94,18 @@
         }
         
         //for adding new topics to the api
-        this.postTopic = function(callback){
-            console.log('posted a new topic');
+        this.postTopic = function(callback, data){
+            console.log("made it to the postTopic")
+            $http.post('https://fdy-brotherdonkey.c9users.io/api-topics/', data)
+            .then(callback);
+            
         }
         
         //for adding comments to topics
-        this.postComment = function(callback){
+        this.postComment = function(callback, data, topicId){
             console.log('post in a new comment');
+            $http.post(`https://fdy-brotherdonkey.c9users.io/api-topics/${topicId}/comments/`, data)
+            .then(callback);
         }
         
         this.deleteComment = function(callback){
