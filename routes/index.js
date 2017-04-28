@@ -122,11 +122,28 @@ router.post('/register', function(req, res, next) {
   
 });
 
+
 // GET /
 router.get('/', function(req, res, next) {
   // if (req.session) {console.log(req.session)} else {console.log("No req.session.userId")};
-  return res.render('index', { title: 'Home' });
+  
+  if (!req.session.userId) {
+      var loggedIn = false;
+      return res.render('index', { title: 'Home', loggedIn: loggedIn });
+   } else {
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          return res.render('index', { title: 'Home', name: user.username, favoriteChar: user.favoriteCharacter });
+        }
+      });
+   }
+   
 });
+
 
 // GET /about
 router.get('/about', function(req, res, next) {

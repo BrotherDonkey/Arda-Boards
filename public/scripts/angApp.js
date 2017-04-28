@@ -1,12 +1,36 @@
 (function(){var App = angular.module("ardaApp", []);
 
-    var mock = {
-          "author": "Will",
-          "text": "hello, world!"
-        };
+
         
     App.controller('TopicsController', function($scope, apiService){
+        
+        
+        $scope.user = document.getElementById('profile-name').innerText;
+        $scope.date = new Date();
+        $scope.newTopic = {
+            "date": $scope.date,
+            "author": $scope.user
+        };
 
+        
+        $scope.submitTopic = function(item) {
+            if (item.text && item.title) {
+                console.dir(item);
+                console.dir("submitted:" + item);
+            //   $scope.list.push(this.text);
+            //   $scope.text = '';
+            
+                $scope.newTopic = {};
+                
+            } else {
+                var error = new Error();
+                var error = "Form incomlete";
+                console.error(error);
+            }
+            
+            item = {};
+        };
+        
         apiService.getTopics(function(response){
                 console.log(response.data);
                 $scope.list = response.data;
@@ -36,6 +60,9 @@
         
     })//end app controller
     .service('apiService', function($http){
+        
+        
+        
         this.helloworld = function(){
             console.log("hello, world!");
         };
