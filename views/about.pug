@@ -9,9 +9,8 @@ block content
         p Sed dictum dolor vitae dignissim scelerisque. Ut tincidunt, tortor at accumsan eleifend, tellus lectus vestibulum nibh, accumsan sagittis turpis nisl eu mauris. Mauris ut laoreet sapien. Nam suscipit, dui at condimentum accumsan, dui sapien tincidunt.
     
         if !currentUser
-          a.btn.btn-info-outline.btn-lg.m-t-1(href='/register') Get Started for FREE
-          
+          a.btn.btn-info-outline.btn-lg.m-t-1.m-x-2(href='/register') Get Started for FREE
+          a.btn.btn-info-outline.btn-lg.m-t-1(href='/login') Log In
+
         if currentUser
-          .btn-group.btn-group-sm(role="group" aria-label="Basic example")
-            a(type="button" href='/profile').btn.btn-primary #{name}
-            a(type="button" href='/logout').btn.btn-secondary Log out
+          h4.display-2 Coming soon!

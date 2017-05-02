@@ -1,7 +1,6 @@
 (function(){var App = angular.module("ardaApp", []);
 
 
-        
     App.controller('TopicsController', function($http, $scope, apiService){
         
         $scope.user = document.getElementById('profile-name').innerText;
@@ -13,9 +12,8 @@
         
         // FUNCTION FOR GET REQUESTS TO GET TOPICS
         apiService.getTopics(function(response){
-                // console.log(response.data);
+                console.log(`${response.data.length} topics were gotten`);
                 $scope.list = response.data;
-                
         });
         
         
@@ -24,6 +22,13 @@
             if (item.text && item.title) {
                 apiService.postTopic(function(){}, item);
                 $scope.newTopic = {};
+                
+                //get Topics to update scope
+                apiService.getTopics(function(response){
+                    console.log(`${response.data.length} topics were gotten here`);
+                    // $scope.list = response.data;
+                    
+                });
                 
             } else {
                 var error = new Error();
@@ -43,6 +48,8 @@
                 apiService.postComment(function(){}, item, item.topicId);
                 $scope.newTopic = {};
                 
+                
+                
                 } else {
                 var error = new Error();
                 var error = "Form incomlete";
@@ -54,15 +61,12 @@
             //reload the page after post -- could also attach $scope.getTopics to this somehow. NEED A NEW ONE
             window.location.reload();
             
-            // apiService.postComment(item);
-            
             
         };
         
         //post topic --see submit topic
         $scope.postTopic = function(item){
             apiService.postTopic(item);
-            
             
             // newComment .topicId .author .text
         };
@@ -82,15 +86,15 @@
     })//end app controller
     .service('apiService', function($http){
         
-        
-        
         this.helloworld = function(){
             console.log("hello, world!");
         };
         
         this.getTopics = function(callback){
             $http.get('https://fdy-brotherdonkey.c9users.io/api-topics/') //can dynamically insert topics?
-            .then(callback);
+            .then(callback, function(err){
+                if (err) console.error("damn! get request problem"+ err);
+            });
         }
         
         //for adding new topics to the api
@@ -117,20 +121,8 @@
         
     });
     
-    
-    App.directive("topicAndComments", function(){
-       return {
-         restrict: "E",
-         templateUrl: 'views/topicAndComments.pug'
-       };
-    });
-        
-        
-    // });//controller end
-    
-        
+
         
         console.log("angular attached");
 
 })(); //end closure
-

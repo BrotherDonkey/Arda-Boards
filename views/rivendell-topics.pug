@@ -66,9 +66,9 @@ block content
                   p.text-success {{comment.votes}} votes
                     a
                       i.text-success.icn-logo.material-icons.m-r-1 whatshot
-                    a
+                    a(ng-click="comment.votes = comment.votes - 1")
                       i.material-icons.m-x-1.m-l-2 thumb_down
-                    a
+                    a(ng-click="comment.votes = comment.votes + 1")
                       i.material-icons.m-x-1 thumb_up
                   hr
                   p.text-primary {{comment.text}}

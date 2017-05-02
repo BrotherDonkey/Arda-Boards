@@ -16,7 +16,8 @@ router.get('/profile', mid.requiresLogin, function(req, res, next) {
     User.findById(req.session.userId)
       .exec(function (error, user) {
         if (error) {
-          return next(error);
+          return res.render('displayError', {title: "Whoops!", errorMessage: error.status});
+          // return next(error);
         } else {
           return res.render('profile', { title: 'Profile', name: user.username, favoriteChar: user.favoriteCharacter });
         }
