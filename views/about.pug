@@ -10,6 +10,8 @@ block content
     
         if !currentUser
           a.btn.btn-info-outline.btn-lg.m-t-1(href='/register') Get Started for FREE
+          
+        if currentUser
           .btn-group.btn-group-sm(role="group" aria-label="Basic example")
             a(type="button" href='/profile').btn.btn-primary #{name}
             a(type="button" href='/logout').btn.btn-secondary Log out
