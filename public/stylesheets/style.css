@@ -176,3 +176,8 @@ a:hover {
 .ng-dirty.ng-valid {
 	border-color: #00C851;
 }
+
+.Custom-Text-Area {
+/*probably won't overwrite bootstrap*/
+	white-space: pre-line;
+}

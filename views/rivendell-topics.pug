@@ -15,11 +15,11 @@ block content
             .card.card-block
                 form(ng-submit="newTopicForm.$valid && submitTopic(newTopic)" name="newTopicForm" novalidate)
                   div.form-group
-                    label(for="formGroupExampleInput").text-primary Title of your topic
-                    input(type="text" class="form-control" id="formGroupExampleInput" placeholder="Not all those who wander are lost." ng-model="newTopic.title" required)
+                    label(for="formGroupInputTopic").text-primary Title of your topic
+                    input(type="text" class="form-control" id="formGroupInputTopic" placeholder="Not all those who wander are lost." ng-model="newTopic.title" required)
                   div.form-group
-                    label(for="formGroupExampleInput").text-primary Topic
-                    textarea(type="text" class="form-control" id="formGroupExampleInput" placeholder="Your illustrious and intellectually generous query, comment, or insight goes here." ng-model="newTopic.text" required)
+                    label(for="formGroupTextAreaTopic").text-primary Topic
+                    textarea(type="text" class="form-control" id="formGroupTextAreaTopic" placeholder="Your illustrious and intellectually generous query, comment, or insight goes here." ng-model="newTopic.text" required).Custom-Text-Area
                     br
                     p(ng-model="newTopic.author").text-muted Topic posted by 
                      strong(id="profile-name") #{name}
@@ -57,7 +57,7 @@ block content
                   form(ng-submit="postComment(newComment)" novalidate)
                     div.form-group
                       label(for="newCommentForm" ng-init="newComment.topicId = item._id") Your wise and erudite contribution to this topic:
-                      textarea(type="text" class="form-control" id="newCommentForm" placeholder='"Many are the strange chances of the world,’ said Mithrandir, ‘and help oft shall come from the hands of the weak when the Wise falter."' ng-model="newComment.text" required)
+                      textarea(type="text" class="form-control" id="newCommentForm" placeholder='"Many are the strange chances of the world,’ said Mithrandir, ‘and help oft shall come from the hands of the weak when the Wise falter."' ng-model="newComment.text" required class="generalTextArea")
                       br
                       // p.text-white {{item._id}}
                       
