@@ -1,0 +1,40 @@
+[{
+            "_id" : "58efe20c59d29140e01a21af",
+            "author" : "Peter",
+            "comments" : [
+                    {
+                            "text" : "Yeah, we know, man.",
+                            "_id" : "58efe3d259d29140e01a21b1",
+                            "votes" : 6,
+                            "author" : "Huy",
+                    },
+                    {
+                            "text" : "I live PB and H",
+                            "_id" : "58efe39359d29140e01a21b0",
+                            "votes" : 8,
+                            "author" : "Will",
+                    }
+            ],
+            "text" : "I love peanutbutter and honey sandwiches!",
+            "__v" : 30
+        },
+        {
+            "_id" : "58efe20c59d29140e01a21af",
+            "author" : "Peter",
+            "comments" : [
+                    {
+                            "text" : "Yeah, we know, man.",
+                            "_id" : "58efe3d259d29140e01a21b1",
+                            "votes" : 6,
+                            "author" : "Huy",
+                    },
+                    {
+                            "text" : "I live PB and H",
+                            "_id" : "58efe39359d29140e01a21b0",
+                            "votes" : 8,
+                            "author" : "Will",
+                    }
+            ],
+            "text" : "I love peanutbutter and honey sandwiches!",
+            "__v" : 30
+        }]

@@ -52,7 +52,7 @@ app.use(logger("dev"));
 
 //TEST
 //topics API route,
-app.use("/topics", apiRouter);
+app.use("/api-topics", apiRouter);
 
 // //simple test middleware for API, note: the colon below is only to add something to the req.params.WHATEVER object
 // app.use("/hello/:id", function(req, res, next){
@@ -114,12 +114,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
 
   // normal way trying both
-  // res.render("error", {
-  //   message: err.message,
-  //   error: {}
-  // });
+  res.render("error", {
+    message: err.message,
+    error: {}
+  });
   
   // json error handler for api -- come back here if API errors aren't working properly.
+  // left on but need to test to see if the json error response actually works properly
   res.json({
     error: {
       message: err.message

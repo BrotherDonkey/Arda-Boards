@@ -3,19 +3,25 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
   #navbar.navbar-nav.collapse.navbar-toggleable-sm
     .container
       a.navbar-brand(href='/')
-        i.icn-logo.material-icons bookmark_border
+        i.icn-logo.material-icons whatshot
         | Arda Boards
       .nav-items.clearfix
         if !currentUser
-          a.nav-item.nav-link(href='register') Sign Up
-        a.nav-item.nav-link(href='about') Fan Art
-        a.nav-item.nav-link(href='contact') Boards
-        a.nav-item.nav-link(href='rivendell') Rivendell
-        a.nav-item.nav-link(href='profile') My Profile
+          a.nav-item.nav-link(href='/register') Sign Up
+          a.nav-item.nav-link(href='/contact') Boards
+          a.nav-item.nav-link(href='/about') Fan Art
+        if currentUser
+          a.nav-item.nav-link(href='/about') Hobbiton
+          a.nav-item.nav-link(href='/rivendell') Rivendell
+        a.nav-item.nav-link(href='/profile') My Profile
+        
       if currentUser
-        div
+        a(href='profile')
           img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='user icon')
-          a.btn.btn-light.pull-md-right(href='/logout') Log out
+        a(href='profile')
+        .btn-group.btn-group-sm(role="group" aria-label="Profile and Logout")
+          a(type="button" href='/profile').btn.btn-primary #{name}
+          a(type="button" href='/logout').btn.btn-secondary Log out
       else
         a.btn.btn-info.pull-md-right(href='login') Login
 

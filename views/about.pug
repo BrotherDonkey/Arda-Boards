@@ -7,5 +7,10 @@ block content
         h1.display-4.m-b-2 Fan Art
         p Love Lord of the Rings fan art? We do too. Upload your own! Check out our favorites below. Share the wealth of Smaug.
         p Sed dictum dolor vitae dignissim scelerisque. Ut tincidunt, tortor at accumsan eleifend, tellus lectus vestibulum nibh, accumsan sagittis turpis nisl eu mauris. Mauris ut laoreet sapien. Nam suscipit, dui at condimentum accumsan, dui sapien tincidunt.
+    
+        if !currentUser
+          a.btn.btn-info-outline.btn-lg.m-t-1.m-x-2(href='/register') Get Started for FREE
+          a.btn.btn-info-outline.btn-lg.m-t-1(href='/login') Log In
 
-        a.btn.btn-info-outline.btn-lg.m-t-1(href='/register') Get Started for FREE
+        if currentUser
+          h4.display-2 Coming soon!

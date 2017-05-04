@@ -10,13 +10,13 @@ const port = process.env.PORT || 3000;
 const  http = require('http');
 const https = require('https');
 
-
 // GET /profile
 router.get('/profile', mid.requiresLogin, function(req, res, next) {
     User.findById(req.session.userId)
       .exec(function (error, user) {
         if (error) {
-          return next(error);
+          return res.render('displayError', {title: "Whoops!", errorMessage: error.status});
+          // return next(error);
         } else {
           return res.render('profile', { title: 'Profile', name: user.username, favoriteChar: user.favoriteCharacter });
         }
@@ -122,20 +122,65 @@ router.post('/register', function(req, res, next) {
   
 });
 
+
 // GET /
 router.get('/', function(req, res, next) {
   // if (req.session) {console.log(req.session)} else {console.log("No req.session.userId")};
-  return res.render('index', { title: 'Home' });
+  
+  if (!req.session.userId) {
+      var loggedIn = false;
+      return res.render('index', { title: 'Home', loggedIn: loggedIn });
+   } else {
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          return res.render('index', { title: 'Home', name: user.username, favoriteChar: user.favoriteCharacter });
+        }
+      });
+   }
+   
 });
+
 
 // GET /about
 router.get('/about', function(req, res, next) {
-  return res.render('about', { title: 'Fan Art' });
+  if (!req.session.userId) {
+      var loggedIn = false;
+      return res.render('about', { title: 'Fan Art', loggedIn: loggedIn });
+   } else {
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          
+          return res.render('about', { title: 'Fan Art', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn });
+        }
+      });
+   }
 });
 
 // GET /contact /questions /topics ????
 router.get('/contact', function(req, res, next) {
-  return res.render('contact', { title: 'Discussion Boards' });
+  if (!req.session.userId) {
+      var loggedIn = false;
+      return res.render('contact', { title: 'Discussion Boards', loggedIn: loggedIn });
+   } else {
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          
+          return res.render('contact', { title: 'Discussion Boards', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn });
+        }
+      });
+   }
 });
 
 
@@ -156,6 +201,46 @@ router.get('/rivendell', function(req, res, next) {
       });
    }
 });
+
+//input limit, then put that into Rivendell:
+
+//seeking to get route for topics/:topicID
+router.get('/rivendell/:topicID', function(req, res, next) {
+  // if (req.session) {console.log(req.session)} else {console.log("No req.session.userId")};
+        ///////
+  
+        if (!req.session.userId) {
+            var loggedIn = false;
+            return res.render('login', { title: 'Login' });
+         } else {
+            // console.log(req.params.topicID);
+            
+            
+            User.findById(req.session.userId)
+                .exec(function (error, user) {
+                  if (error) {
+                    return res.render('displayError', {title: "Whoops!", errorMessage: error.status});
+                    // return next(error);
+                  } else {
+                    // return res.render('profile', { title: 'Profile', name: user.username, favoriteChar: user.favoriteCharacter });
+                  }
+                
+                    //callback hell: why? first picks up the current user from the db, then the topic in question, passing in some params so that Angular can use it in a bit?
+                
+                    Topic.findById(req.params.topicID)
+                      .exec(function (error, topicx) {
+                        if (error) {
+                          return next(error);
+                        } else {
+                          // req.thisTopic = req.params.topicID
+                          return res.render('singleTopic', { title: topicx.title, text: topicx.text, id: topicx._id, name: user.username});
+                        }
+                      });
+                  
+            });
+         }
+   
+});//end get
 
 
 module.exports = router;
