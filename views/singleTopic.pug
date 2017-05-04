@@ -1,0 +1,60 @@
+extends layout
+
+block content
+  div(ng-app="ardaApp")
+    .main.container(ng-controller="SingleTopicController as topic").clearfix
+      .row
+        .col-md-2
+        .col-md-8
+          h2.display-3 {{pageTopic.title}}
+          .text-white
+            p.m-y-2.m-x-2.text-white
+              span.m-r-2(class="badge badge-primary").text-white Author: {{pageTopic.author}}
+              span.m-r-2(class="badge badge-primary").text-white Comments: {{pageTopic.comments.length}}
+              span.m-r-2(class="badge badge-primary").text-white Posted: {{pageTopic.createdAt | date:'MM/dd/yyyy, h:mma'}}
+            hr
+        .col-md-2
+          div(id="profile-name" ng-hide="true") #{name}
+          div(id='topic-id' ng-hide="true") #{id}
+      .row
+        .col-md-2
+        .col-md-8.card.card-outline-success.p-x-2.p-y-2
+          .text-muted {{pageTopic.text}}
+           //repeat topics, limit five on this page
+           //no ng-repeat, just show the topic
+           //filter through the array of topics, producing only the current one, load that into the scope
+           //different controller?
+        .col-md-2
+      .row.m-t-3
+        .col-md-3
+        .col-md-6
+          p
+           a.btn.btn-primary(data-toggle="collapse" href="#showComments" aria-expanded="false" aria-controls="showComments") Show Comments
+            div(class="collapse" id="showComments")
+              div.card.card-block.text-muted
+                div
+                 a.btn.btn-primary(data-toggle="collapse" href="#addComment-{{pageTopic._id}}" aria-expanded="false" aria-controls="addComment-{{pageTopic._id}}" data-topicId="{{pageTopic._id}}") Add a new comment
+                div(id="addComment-{{pageTopic._id}}").collapse
+                 .card.card-block
+                  form(ng-submit="postComment(newComment)" novalidate)
+                    div.form-group
+                      label(for="newCommentForm" ng-init="newComment.topicId = item._id") Your wise and erudite contribution to this topic:
+                      textarea(type="text" class="form-control" id="newCommentForm" placeholder='"Many are the strange chances of the world,’ said Mithrandir, ‘and help oft shall come from the hands of the weak when the Wise falter."' ng-model="newComment.text" required)
+                      br
+                      p.text-white {{pageTopic._id}}
+                      p(ng-model="newComment.author") Comment posted by <strong>{{newComment.author}}</strong>
+                      input(class="btn btn-primary" type="submit" value="Submit")
+                div(ng-repeat="comment in pageTopic.comments").m-y-1.card-footer.card.card-block
+                  // p.text-success {{comment.votes}} votes
+                    a
+                      i.text-success.icn-logo.material-icons.m-r-1 whatshot
+                    a(ng-click="comment.votes = comment.votes - 1")
+                      i.material-icons.m-x-1.m-l-2 thumb_down
+                    a(ng-click="comment.votes = comment.votes + 1")
+                      i.material-icons.m-x-1 thumb_up
+                  p.text-primary {{comment.text}}
+                  hr
+                  p.text-success {{comment.createdAt | date:'MM/dd/yyyy @ h:mma'}}
+                  button.btn.btn-primary.btn-sm - {{comment.author}}
+        .col-md-3
+        

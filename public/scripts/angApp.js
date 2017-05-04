@@ -3,6 +3,7 @@
 
     App.controller('TopicsController', function($http, $scope, apiService){
         
+        
         $scope.user = document.getElementById('profile-name').innerText;
         $scope.date = new Date();
         $scope.newTopic = {
@@ -10,11 +11,16 @@
             "author": $scope.user
         };
         
+        
+        
+        
         // FUNCTION FOR GET REQUESTS TO GET TOPICS
         apiService.getTopics(function(response){
                 console.log(`${response.data.length} topics were gotten`);
                 $scope.list = response.data;
         });
+        
+        
         
         
         // FUNC FOR POST ROUTE -- MAKE NEW TOPICS
@@ -27,7 +33,6 @@
                 apiService.getTopics(function(response){
                     console.log(`${response.data.length} topics were gotten here`);
                     // $scope.list = response.data;
-                    
                 });
                 
             } else {
@@ -43,16 +48,19 @@
         
          // post comment
         $scope.postComment = function(item){
+
+            item.author = $scope.user;
+            
             if (item.text && item.topicId) {
-                console.log(item.topicId)
+                console.log(item.topicId, item.author);
                 apiService.postComment(function(){}, item, item.topicId);
+                
+                
                 $scope.newTopic = {};
-                
-                
                 
                 } else {
                 var error = new Error();
-                var error = "Form incomlete";
+                error = "Form incomlete";
                 console.error(error);
             }
             
@@ -83,8 +91,9 @@
         };
         
         
-    })//end app controller
-    .service('apiService', function($http){
+    });//end app controller
+    
+    App.service('apiService', function($http){
         
         this.helloworld = function(){
             console.log("hello, world!");
@@ -95,32 +104,63 @@
             .then(callback, function(err){
                 if (err) console.error("damn! get request problem"+ err);
             });
-        }
+        };
+        
+        this.getOneTopic = function(callback){
+            $http.get('https://fdy-brotherdonkey.c9users.io/api-topics/') //can dynamically insert topics?
+            .then(callback, function(err){
+                if (err) console.error("damn! get request problem"+ err);
+            });
+        };
+
         
         //for adding new topics to the api
         this.postTopic = function(callback, data){
-            console.log("made it to the postTopic")
+            console.log("made it to the postTopic");
             $http.post('https://fdy-brotherdonkey.c9users.io/api-topics/', data)
             .then(callback);
-            
-        }
+        };
         
         //for adding comments to topics
         this.postComment = function(callback, data, topicId){
-            console.log('post in a new comment');
+            // console.log('post in a new comment', data);
             $http.post(`https://fdy-brotherdonkey.c9users.io/api-topics/${topicId}/comments/`, data)
             .then(callback);
-        }
+        };
         
         this.deleteComment = function(callback){
-            console.log("delete a comment")
-        }
+            console.log("delete a comment");
+        };
+
+    });
+    
+    
+    App.controller('SingleTopicController', function($http, $scope, apiService){
         
-        //
+        console.log($scope.list);
+        
+        // FUNCTION FOR GET REQUESTS TO GET TOPICS
+        apiService.getOneTopic(function(response){
+        console.log(`${response.data.length} topics were gotten`);
+        
+        var id = document.getElementById("topic-id").innerText;
+        console.log(id);
+        
+        
+        
+        $scope.list = response.data;
+        $scope.pageTopic = response.data.filter(function(item){
+            if (item._id === id) {
+                return item;
+            }
+        });
+        
+        $scope.pageTopic = $scope.pageTopic[0];
+
+        });
         
         
     });
-    
 
         
         console.log("angular attached");

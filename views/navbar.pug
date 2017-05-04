@@ -7,13 +7,13 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
         | Arda Boards
       .nav-items.clearfix
         if !currentUser
-          a.nav-item.nav-link(href='register') Sign Up
-          a.nav-item.nav-link(href='contact') Boards
-          a.nav-item.nav-link(href='about') Fan Art
+          a.nav-item.nav-link(href='/register') Sign Up
+          a.nav-item.nav-link(href='/contact') Boards
+          a.nav-item.nav-link(href='/about') Fan Art
         if currentUser
-          a.nav-item.nav-link(href='about') Hobbiton
-          a.nav-item.nav-link(href='rivendell') Rivendell
-        a.nav-item.nav-link(href='profile') My Profile
+          a.nav-item.nav-link(href='/about') Hobbiton
+          a.nav-item.nav-link(href='/rivendell') Rivendell
+        a.nav-item.nav-link(href='/profile') My Profile
         
       if currentUser
         a(href='profile')
