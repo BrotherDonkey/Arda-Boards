@@ -9,6 +9,39 @@ const request = require("request");
 const port = process.env.PORT || 3000;
 const  http = require('http');
 const https = require('https');
+var multer = require('multer');
+
+// for image upload
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public/images/user-profiles');
+  },
+  filename: function (req, file, callback) {
+    var fileusername = "none";
+    console.log(typeof req.session.userId);
+    var username = User.findById(req.session.userId).exec(function(error, user){
+      
+      fileusername = user.username;
+      // user.username.profileImage = `${file.fieldname}-${req.session.userId.substring(0, 5)}-${fileusername}`
+      
+      var filename = file.fieldname + "-" + req.session.userId.substring(0, 5) + "-" + fileusername;
+      var pathAndFilename = `/images/user-profiles/${filename}`
+
+      //upload the new image with unique filename
+      callback(null, filename);
+      
+      User.findOne({ _id: req.session.userId }, function (err, user){
+        if (err) throw err;
+        console.log(user);
+        user.profileImage = pathAndFilename;
+        user.save();
+      });
+    });
+  }
+});
+
+const upload = multer({ storage : storage }).single('userPhoto');
+
 
 // GET /profile
 router.get('/profile', mid.requiresLogin, function(req, res, next) {
@@ -18,7 +51,7 @@ router.get('/profile', mid.requiresLogin, function(req, res, next) {
           return res.render('displayError', {title: "Whoops!", errorMessage: error.status});
           // return next(error);
         } else {
-          return res.render('profile', { title: 'Profile', name: user.username, favoriteChar: user.favoriteCharacter });
+          return res.render('profile', { title: 'Profile', name: user.username, favoriteChar: user.favoriteCharacter, profileImage: user.profileImage});
         }
       });
 });
@@ -142,7 +175,7 @@ router.get('/', function(req, res, next) {
         if (error) {
           return next(error);
         } else {
-          return res.render('index', { title: 'Home', name: user.username, favoriteChar: user.favoriteCharacter });
+          return res.render('index', { title: 'Home', name: user.username, favoriteChar: user.favoriteCharacter, profileImage: user.profileImage });
         }
       });
    }
@@ -163,7 +196,7 @@ router.get('/about', function(req, res, next) {
           return next(error);
         } else {
           
-          return res.render('about', { title: 'Fan Art', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn });
+          return res.render('about', { title: 'Fan Art', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn, profileImage: user.profileImage });
         }
       });
    }
@@ -182,7 +215,7 @@ router.get('/contact', function(req, res, next) {
           return next(error);
         } else {
           
-          return res.render('contact', { title: 'Discussion Boards', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn });
+          return res.render('contact', { title: 'Discussion Boards', name: user.username, favoriteChar: user.favoriteCharacter, loggedIn: loggedIn, profileImage: user.profileImage });
         }
       });
    }
@@ -201,7 +234,7 @@ router.get('/rivendell', function(req, res, next) {
           return next(error);
         } else {
           
-          return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter });
+          return res.render('rivendell-topics', { title: 'Rivendell', name: user.username, favoriteChar: user.favoriteCharacter,profileImage: user.profileImage });
         }
       });
    }
@@ -238,7 +271,7 @@ router.get('/rivendell/:topicID', function(req, res, next) {
                           return next(error);
                         } else {
                           // req.thisTopic = req.params.topicID
-                          return res.render('singleTopic', { title: topicx.title, text: topicx.text, id: topicx._id, name: user.username});
+                          return res.render('singleTopic', { title: topicx.title, text: topicx.text, id: topicx._id, name: user.username,  profileImage: user.profileImage});
                         }
                       });
                   
@@ -246,6 +279,17 @@ router.get('/rivendell/:topicID', function(req, res, next) {
          }
    
 });//end get
+
+//post route for uploading new profile images
+router.post('/api/photo',function(req,res){
+    upload(req,res,function(err) {
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        console.log("file uploaded");
+        return res.redirect('/profile');
+    });
+});
 
 
 module.exports = router;

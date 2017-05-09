@@ -5,12 +5,22 @@ block content
     .row
       .col-md-8.col-md-offset-2
         h1.display-4
-          img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='avatar')
+          img(id="profileAvatar" src=profileImage, alt='avatar').avatar.img-circle.hidden-xs-down
           | #{name}
-        h2.favorite-book Favorite Character
+        br
+        br
+        form(id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post")
+          label(for="userPhoto")
+            h6 Change Profile Picture
+          br
+          p (make it square for best results)
+          input(type="file" name="userPhoto")
+          input(type="submit" value="Upload Image" name="submit").btn.btn-primary
+        hr
+        h2.display-4 Profile info
+        hr
+        h5.favorite-book Favorite Character
         | #{favoriteChar}
-        br
-        br
-        label(class="btn btn-primary" for="my-file-selector") Change Profile Picture
-          input(id="my-file-selector" type="file" style="display:none;" onchange="$('#upload-file-info').text($(this).val());")
-        span(class='label label-info' id="upload-file-info")
+
+        
+        

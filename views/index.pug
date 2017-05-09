@@ -2,8 +2,15 @@ extends layout
 
 block content
   .main.container.text-xs-center
-    h1.display-3 Arda Boards
-    p.lead A great place for Tolkien fans to discuss!
-    a.btn.btn-info-outline.btn-lg(href='/register') Register Now
+    .row
+      h1.display-3 Arda Boards
+      p.lead A great place for Tolkien fans to discuss!
+      
+    .row
+      if !currentUser
+        a.btn.btn-info-outline.btn-lg.m-t-1.m-x-1(href='/register') Register Now
+        a.btn.btn-info-outline.btn-lg.m-t-1(href='/login') Log In
+      if currentUser
+        a.btn.btn-info-outline.btn-lg.m-t-1(href='/rivendell') Get Going
 
 

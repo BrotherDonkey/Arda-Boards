@@ -177,7 +177,25 @@ a:hover {
 	border-color: #00C851;
 }
 
-.Custom-Text-Area {
-/*probably won't overwrite bootstrap*/
-	white-space: pre-line;
+.white-spaced {
+	white-space:pre-wrap;
+	line-height: 1.2em;
 }
+
+@media only screen and (min-width: 40.063em) {
+	
+	.avatar {
+	width: 50px;
+	margin-right: 18px;
+	border: solid 2px rgba(255,255,255, .75);
+	}
+	
+	#profileAvatar {
+		width: 150px;
+	}
+
+
+	
+} /* min-width 641px, medium screens */
+
+

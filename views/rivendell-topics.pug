@@ -44,7 +44,7 @@ block content
                   h4.card-title.text-primary.card-header {{item.title}}
                 hr
                 p.glyphicon.glyphicon-fire
-                p.card-text {{item.text}}
+                p.white-spaced.card-text {{item.text}}
                 a(href="/users/{{item.author}}")
                   .btn.btn-link - {{item.author}} @ {{item.createdAt | date:'MM/dd/yyyy, h:mma'}}
                 h5.m-y-1.text-primary {{item.comments.length}} Comment(s):
@@ -72,7 +72,7 @@ block content
                     a(ng-click="comment.votes = comment.votes + 1")
                       i.material-icons.m-x-1 thumb_up
                   
-                  p.text-primary {{comment.text}}
+                  p.text-primary.white-spaced {{comment.text}}
                   hr
                   p.text-success {{comment.createdAt | date:'MM/dd/yyyy @ h:mma'}}
                   button.btn.btn-primary.btn-sm - {{comment.author}}
