@@ -29,7 +29,7 @@ var UserSchema = new mongoose.Schema({
         type:String,
         required: true,
         trim: true,
-        default: "/public/images/avatar.png"
+        default: "/images/user-profiles/avatar.png"
     },
     password: {
         type: String,
