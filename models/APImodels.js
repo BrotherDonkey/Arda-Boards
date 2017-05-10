@@ -20,7 +20,7 @@ var CommentSchema = new Schema({
     updatedAt: {type: Date, default: Date.now },
     author: {type: String, default: "anonymous"},
     votes: {type: Number, default: 0 },
-    authorImg: {type: String, default: "/images/user-profiles/avatar.jpg"}
+    authorImg: {type: String, default: "/images/user-profiles/avatar.png"}
 });
 
 //instance method, way to make number1:
@@ -48,7 +48,7 @@ var TopicSchema = new Schema({
     createdAt: {type: Date, default: Date.now },
     comments: [CommentSchema], //place Comment Schema as the only element in this array, as a signal to Mongo that they're related.
     author: {type: String, default: "anonymous"},
-    authorImg: {type: String, default: "/images/user-profiles/avatar.jpg"}
+    authorImg: {type: String, default: "/images/user-profiles/avatar.png"}
 });
 
 //order comments when Topic is saved.

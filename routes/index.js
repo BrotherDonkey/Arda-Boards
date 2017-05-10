@@ -261,20 +261,16 @@ router.get('/rivendell/:topicID', function(req, res, next) {
                     // return next(error);
                   } else {
                     // return res.render('profile', { title: 'Profile', name: user.username, favoriteChar: user.favoriteCharacter });
-                  }
-                
-                    //callback hell: why? first picks up the current user from the db, then the topic in question, passing in some params so that Angular can use it in a bit?
-                
                     Topic.findById(req.params.topicID)
                       .exec(function (error, topicx) {
-                        if (error) {
-                          return next(error);
-                        } else {
-                          // req.thisTopic = req.params.topicID
-                          return res.render('singleTopic', { title: topicx.title, text: topicx.text, id: topicx._id, name: user.username,  profileImage: user.profileImage});
-                        }
+                          if (error) {
+                            return next(error);
+                          } else {
+                            // req.thisTopic = req.params.topicID
+                            return res.render('singleTopic', { title: topicx.title, text: topicx.text, id: topicx._id, name: user.username,  profileImage: user.profileImage});
+                          }
                       });
-                  
+                  }
             });
          }
    
@@ -282,7 +278,7 @@ router.get('/rivendell/:topicID', function(req, res, next) {
 
 //post route for uploading new profile images
 router.post('/api/photo',function(req,res){
-    upload(req,res,function(err) {
+    upload(req,res, function(err) {
         if(err) {
             return res.end("Error uploading file.");
         }

@@ -5,12 +5,20 @@
         
         
         $scope.user = document.getElementById('profile-name').innerText;
+       
+       //getting authorImg src 
+        let authorImgArr = document.getElementById('navitar').src.split("/im");
+        let baseUrl = authorImgArr.shift();
+        $scope.userImg = `/im${authorImgArr[0]}`;
+       
         $scope.date = new Date();
         $scope.newTopic = {
             "date": $scope.date,
-            "author": $scope.user
+            "author": $scope.user,
+            "authorImg": $scope.userImg
         };
         
+        // console.log($scope.userImg);
         
         
         
@@ -31,7 +39,7 @@
                 
                 //get Topics to update scope
                 apiService.getTopics(function(response){
-                    console.log(`${response.data.length} topics were gotten here`);
+                    // console.log(`${response.data.length} topics were gotten here`);
                     // $scope.list = response.data;
                 });
                 
@@ -50,6 +58,7 @@
         $scope.postComment = function(item){
 
             item.author = $scope.user;
+            item.authorImg = $scope.userImg;
             
             if (item.text && item.topicId) {
                 console.log(item.topicId, item.author);

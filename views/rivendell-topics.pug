@@ -46,6 +46,7 @@ block content
                 p.glyphicon.glyphicon-fire
                 p.white-spaced.card-text {{item.text}}
                 a(href="/users/{{item.author}}")
+                  img(ng-src="{{item.authorImg}}").avatar.img-circle.hidden-xs-down
                   .btn.btn-link - {{item.author}} @ {{item.createdAt | date:'MM/dd/yyyy, h:mma'}}
                 h5.m-y-1.text-primary {{item.comments.length}} Comment(s):
                 hr
@@ -74,8 +75,10 @@ block content
                   
                   p.text-primary.white-spaced {{comment.text}}
                   hr
-                  p.text-success {{comment.createdAt | date:'MM/dd/yyyy @ h:mma'}}
-                  button.btn.btn-primary.btn-sm - {{comment.author}}
+                  span
+                    img(ng-src="{{comment.authorImg}}").avatar.img-circle
+                    button.btn.btn-primary.btn-sm - {{comment.author}}
+                    p.text-success - {{comment.createdAt | date:'MM/dd/yyyy @ h:mma'}}
                   
               div
               p End repeat.
