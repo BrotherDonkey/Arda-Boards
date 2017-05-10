@@ -29,7 +29,7 @@ block content
              p.text-muted.m-b-1 Preview:
              h4.text-primary {{newTopic.title}}
              p.text-muted {{newTopic.text}}
-             button.btn.btn-link - #{name} @ {{ date | date:'MM/dd/yyyy, h:mma'}}
+             button.btn.btn-link - #{name} @ {{ date | date:'longDate'}}
           br
           br
       .row
@@ -47,7 +47,7 @@ block content
                 p.white-spaced.card-text {{item.text}}
                 a(href="/users/{{item.author}}")
                   img(ng-src="{{item.authorImg}}").avatar.img-circle.hidden-xs-down
-                  .btn.btn-link - {{item.author}} @ {{item.createdAt | date:'MM/dd/yyyy, h:mma'}}
+                  .btn.btn-link - {{item.author}} @ {{item.createdAt | date:'longDate'}}
                 h5.m-y-1.text-primary {{item.comments.length}} Comment(s):
                 hr
                 // collapsable add comment form
@@ -78,7 +78,7 @@ block content
                   span
                     img(ng-src="{{comment.authorImg}}").avatar.img-circle
                     button.btn.btn-primary.btn-sm - {{comment.author}}
-                    p.text-success - {{comment.createdAt | date:'MM/dd/yyyy @ h:mma'}}
+                    p.text-success - {{comment.createdAt | date:'longDate'}}
                   
               div
               p End repeat.

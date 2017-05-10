@@ -13,9 +13,10 @@ block content
           h2.display-4 {{pageTopic.title}}
           .text-white
             p.m-y-2.m-x-2.text-white
-              span.m-r-2(class="badge badge-primary").text-white Author: {{pageTopic.author}}
-              span.m-r-2(class="badge badge-primary").text-white Comments: {{pageTopic.comments.length}}
-              span.m-r-2(class="badge badge-primary").text-white Posted: {{pageTopic.createdAt | date:'MM/dd/yyyy, h:mma'}}
+              img.m-r-2.img-circle.avatar(ng-src="{{pageTopic.authorImg}}")
+              span.m-r-2(class="badge badge-primary").text-white {{pageTopic.author}}
+              span.m-r-2(class="badge badge-primary").text-white {{pageTopic.comments.length}} comment(s):
+              span.m-r-2(class="badge badge-primary").text-white {{pageTopic.createdAt | date:'longDate'}}
             hr
         .col-md-2
           div(id="profile-name" ng-hide="true") #{name}
@@ -58,7 +59,9 @@ block content
                       i.material-icons.m-x-1 thumb_up
                   p.text-primary.white-spaced {{comment.text}}
                   hr
-                  p.text-success {{comment.createdAt | date:'MM/dd/yyyy @ h:mma'}}
-                  button.btn.btn-primary.btn-sm - {{comment.author}}
+                  span
+                    img(ng-src="{{comment.authorImg}}").avatar.img-circle
+                    button.btn.btn-primary.btn-sm - {{comment.author}}
+                    p.text-primary - {{comment.createdAt | date:'longDate'}}
         .col-md-3
         
