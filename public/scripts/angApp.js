@@ -145,18 +145,18 @@
     
     
     App.controller('SingleTopicController', function($http, $scope, apiService){
-        
-        console.log($scope.list);
-        
+        //getting authorImg src 
+        let authorImgArr = document.getElementById('navitar').src.split("/im");
+        let baseUrl = authorImgArr.shift();
+        $scope.userImg = `/im${authorImgArr[0]}`;
+        $scope.user = document.getElementById('profile-name').innerText;
+        $scope.topicId = document.getElementById('topic-id').innerText;
+
         // FUNCTION FOR GET REQUESTS TO GET TOPICS
         apiService.getOneTopic(function(response){
-        console.log(`${response.data.length} topics were gotten`);
-        
-        var id = document.getElementById("topic-id").innerText;
-        console.log(id);
-        
-        
-        
+
+        var id =  $scope.topicId;
+
         $scope.list = response.data;
         $scope.pageTopic = response.data.filter(function(item){
             if (item._id === id) {
@@ -168,9 +168,37 @@
 
         });
         
+        $scope.postComment = function(item){
+            
+            
+            item.author = $scope.user;
+            item.authorImg = $scope.userImg;
+            item.topicId = $scope.topicId;
+            
+            if (item.text && item.topicId) {
+                console.log(item.topicId, item.author);
+                apiService.postComment(function(){
+                    
+                }, item, item.topicId);
+                
+                
+                $scope.newTopic = {};
+                
+                } else {
+                var error = new Error();
+                error = "Form incomlete";
+                console.error(error);
+            }
+            item = {};
+            
+            //reload the page after post -- could also attach $scope.getTopics to this somehow. NEED A NEW ONE
+            window.location.reload();
+            
+            
+        };
+        
         
     });
-
         
         console.log("angular attached");
 

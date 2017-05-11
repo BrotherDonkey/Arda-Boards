@@ -43,7 +43,7 @@ block content
                  .card.card-block
                   form(ng-submit="postComment(newComment)" novalidate)
                     div.form-group
-                      label(for="newCommentForm" ng-init="newComment.topicId = item._id") Your wise and erudite contribution to this topic:
+                      label(for="newCommentForm" ng-init="newComment.topicId = topicId") Your wise and erudite contribution to this topic:
                       textarea(type="text" class="form-control" id="newCommentForm" placeholder='"Many are the strange chances of the world,’ said Mithrandir, ‘and help oft shall come from the hands of the weak when the Wise falter."' ng-model="newComment.text" required)
                       br
                       p.text-white {{pageTopic._id}}

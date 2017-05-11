@@ -20,7 +20,8 @@ var CommentSchema = new Schema({
     updatedAt: {type: Date, default: Date.now },
     author: {type: String, default: "anonymous"},
     votes: {type: Number, default: 0 },
-    authorImg: {type: String, default: "/images/user-profiles/avatar.png"}
+    authorImg: {type: String, default: "/images/user-profiles/avatar.png"},
+    voted: {type: Array, default: []}
 });
 
 //instance method, way to make number1:
