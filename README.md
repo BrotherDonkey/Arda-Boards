@@ -1,7 +1,7 @@
 # Arda Boards
 --------------
 A site devoted to discussing Arda, the mythical world imagine and popularized by J.R.R. Tolkien.
-![]()
+
 ### Specs
 Arda, soon to be a welcoming community for fantasy-lit lovers, is also pretty MEAN. It's an ExpressJS server for both routes and API. On the front end Arda Boards enlists some old school Angular and Jade templating magic. It was built mostly on Cloud9's sweet online IDE.
 
