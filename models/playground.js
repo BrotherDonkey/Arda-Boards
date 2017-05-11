@@ -12,3 +12,4 @@ var exampleTopic = {
     "text": "This is the entire post of the topic right here, posted again and again. This is the entire post of the topic right here, posted again and again.This is the entire post of the topic right here, posted again and again.",
     "author": "The Author of the Topic"
 }
+

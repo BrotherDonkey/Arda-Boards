@@ -1,30 +1,40 @@
-#Arda Boards
+# Arda Boards
+--------------
+A site devoted to discussing Arda, the mythical world imagine and popularized by J.R.R. Tolkien.
+![]()
+### Specs
+Arda, soon to be a welcoming community for fantasy-lit lovers, is also pretty MEAN. It's an ExpressJS server for both routes and API. On the front end Arda Boards enlists some old school Angular and Jade templating magic. It was built mostly on Cloud9's sweet online IDE.
 
-A server, API, and website for the discussion of Tolkien's lore and the magical universe of Arda. This site uses Pug (formerly Jade) templates, MongoDB, and Express server framework for NodeJS. Built mostly on Cloud9's IDE.
+## Roadmap
+The trek to Mordor didn't happen in a day.
 
-###Helpful links:
+#### General Todos
++ Connect POST routes to individual topics (singleTopic.pug)
++ Connect voting API to comments on /rivendell and singleTopic.pug.
++ Connect DELETE routes to front end.
++ Connect PUT routes to front end.
 
-##Express and Mongo on Cloud9
+#### Possible bugs:
++ Current Problem with conditional logic on login. I wonder if this is the source: http://mongoosejs.com/docs/promises.html
 
-http://stackoverflow.com/questions/15087953/running-hello-world-using-node-js-express-in-cloud-9ide
 
-https://community.c9.io/t/setting-up-mongodb/1717
+## Helpful links:
+Helpful for me, at least.
+#### Setup on Cloud9
++ [Running Node on C9](http://stackoverflow.com/questions/15087953/running-hello-world-using-node-js-express-in-cloud-9ide)
++ [Setting up mongo on C9](https://community.c9.io/t/setting-up-mongodb/1717)
 
-run mongod:
 
+## Notes:
+#### running mongod on c9:
+Because of file size restraints, Mongo needs a little massaging.
 ```
 mongod --smallfiles (works)
-mongod --nojournal (this works)
-or: mongod --nojournal --smallfiles
+mongod --nojournal (works)
+<!--Both together-->
+mongod --nojournal --smallfiles
 ```
+This also fixes a problem involving a [bad shutdown --> Mongo Docs](https://docs.mongodb.com/manual/tutorial/recover-data-following-unexpected-shutdown/).
 
-Current Problem with conditional on login
-I wonder if this is the source: 
-http://mongoosejs.com/docs/promises.html
-
-Problem involving a bad shutdown:
-https://docs.mongodb.com/manual/tutorial/recover-data-following-unexpected-shutdown/
-
-Integrating Angular into Pug templates:
-https://codepen.io/khilnani/pen/GKcwD
-https://glebbahmutov.com/blog/angularjs-inside-jade-templates/
+#### Angular and Pug
+Great article on [integrating Angular into Pug](https://codepen.io/khilnani/pen/GKcwD https://glebbahmutov.com/blog/angularjs-inside-jade-templates/). Hint, it's just like you'd think!

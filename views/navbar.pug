@@ -17,7 +17,7 @@ nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
         
       if currentUser
         a(href='profile')
-          img.avatar.img-circle.hidden-xs-down(src='/images/avatar.png', alt='user icon')
+          img.avatar.img-circle.hidden-xs-down(src=profileImage, alt='user icon' id="navitar")
         a(href='profile')
         .btn-group.btn-group-sm(role="group" aria-label="Profile and Logout")
           a(type="button" href='/profile').btn.btn-primary #{name}

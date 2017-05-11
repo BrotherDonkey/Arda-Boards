@@ -15,11 +15,11 @@ block content
             .card.card-block
                 form(ng-submit="newTopicForm.$valid && submitTopic(newTopic)" name="newTopicForm" novalidate)
                   div.form-group
-                    label(for="formGroupExampleInput").text-primary Title of your topic
-                    input(type="text" class="form-control" id="formGroupExampleInput" placeholder="Not all those who wander are lost." ng-model="newTopic.title" required)
+                    label(for="formGroupInputTopic").text-primary Title of your topic
+                    input(type="text" class="form-control" id="formGroupInputTopic" placeholder="Not all those who wander are lost." ng-model="newTopic.title" required)
                   div.form-group
-                    label(for="formGroupExampleInput").text-primary Topic
-                    textarea(type="text" class="form-control" id="formGroupExampleInput" placeholder="Your illustrious and intellectually generous query, comment, or insight goes here." ng-model="newTopic.text" required)
+                    label(for="formGroupTextAreaTopic").text-primary Topic
+                    textarea(type="text" class="form-control" id="formGroupTextAreaTopic" placeholder="Your illustrious and intellectually generous query, comment, or insight goes here." ng-model="newTopic.text" required).Custom-Text-Area
                     br
                     p(ng-model="newTopic.author").text-muted Topic posted by 
                      strong(id="profile-name") #{name}
@@ -29,7 +29,7 @@ block content
              p.text-muted.m-b-1 Preview:
              h4.text-primary {{newTopic.title}}
              p.text-muted {{newTopic.text}}
-             button.btn.btn-link - #{name} @ {{ date | date:'MM/dd/yyyy, h:mma'}}
+             button.btn.btn-link - #{name} @ {{ date | date:'longDate'}}
           br
           br
       .row
@@ -44,9 +44,10 @@ block content
                   h4.card-title.text-primary.card-header {{item.title}}
                 hr
                 p.glyphicon.glyphicon-fire
-                p.card-text {{item.text}}
+                p.white-spaced.card-text {{item.text}}
                 a(href="/users/{{item.author}}")
-                  .btn.btn-link - {{item.author}} @ {{item.createdAt | date:'MM/dd/yyyy, h:mma'}}
+                  img(ng-src="{{item.authorImg}}").avatar.img-circle.hidden-xs-down
+                  .btn.btn-link - {{item.author}} @ {{item.createdAt | date:'longDate'}}
                 h5.m-y-1.text-primary {{item.comments.length}} Comment(s):
                 hr
                 // collapsable add comment form
@@ -57,7 +58,7 @@ block content
                   form(ng-submit="postComment(newComment)" novalidate)
                     div.form-group
                       label(for="newCommentForm" ng-init="newComment.topicId = item._id") Your wise and erudite contribution to this topic:
-                      textarea(type="text" class="form-control" id="newCommentForm" placeholder='"Many are the strange chances of the world,’ said Mithrandir, ‘and help oft shall come from the hands of the weak when the Wise falter."' ng-model="newComment.text" required)
+                      textarea(type="text" class="form-control" id="newCommentForm" placeholder='"Many are the strange chances of the world,’ said Mithrandir, ‘and help oft shall come from the hands of the weak when the Wise falter."' ng-model="newComment.text" required class="generalTextArea")
                       br
                       // p.text-white {{item._id}}
                       
@@ -72,10 +73,12 @@ block content
                     a(ng-click="comment.votes = comment.votes + 1")
                       i.material-icons.m-x-1 thumb_up
                   
-                  p.text-primary {{comment.text}}
+                  p.text-primary.white-spaced {{comment.text}}
                   hr
-                  p.text-success {{comment.createdAt | date:'MM/dd/yyyy @ h:mma'}}
-                  button.btn.btn-primary.btn-sm - {{comment.author}}
+                  span
+                    img(ng-src="{{comment.authorImg}}").avatar.img-circle
+                    button.btn.btn-primary.btn-sm - {{comment.author}}
+                    p.text-success - {{comment.createdAt | date:'longDate'}}
                   
               div
               p End repeat.
