@@ -103,25 +103,22 @@
     });//end app controller
     
     App.service('apiService', function($http){
-        
-        this.helloworld = function(){
-            console.log("hello, world!");
-        };
-        
+
+        // GET topics from api
         this.getTopics = function(callback){
-            $http.get('https://fdy-brotherdonkey.c9users.io/api-topics/') //can dynamically insert topics?
+            $http.get('https://fdy-brotherdonkey.c9users.io/api-topics/')
             .then(callback, function(err){
                 if (err) console.error("damn! get request problem"+ err);
             });
         };
         
+        // GET all topics, see in controller filtering down to singular topic (SingleTopicController)
         this.getOneTopic = function(callback){
             $http.get('https://fdy-brotherdonkey.c9users.io/api-topics/') //can dynamically insert topics?
             .then(callback, function(err){
                 if (err) console.error("damn! get request problem"+ err);
             });
         };
-
         
         //for adding new topics to the api
         this.postTopic = function(callback, data){
@@ -146,30 +143,30 @@
     
     App.controller('SingleTopicController', function($http, $scope, apiService){
         //getting authorImg src 
-        let authorImgArr = document.getElementById('navitar').src.split("/im");
-        let baseUrl = authorImgArr.shift();
+        let authorImgArr = document.getElementById('navitar').src.split("/im"),
+            baseUrl = authorImgArr.shift();
+        
+        // setting scope variables
         $scope.userImg = `/im${authorImgArr[0]}`;
         $scope.user = document.getElementById('profile-name').innerText;
         $scope.topicId = document.getElementById('topic-id').innerText;
 
-        // FUNCTION FOR GET REQUESTS TO GET TOPICS
+        // Get topics, filter down to the specified ID, display on page.
         apiService.getOneTopic(function(response){
-
-        var id =  $scope.topicId;
-
-        $scope.list = response.data;
-        $scope.pageTopic = response.data.filter(function(item){
-            if (item._id === id) {
-                return item;
-            }
-        });
-        
-        $scope.pageTopic = $scope.pageTopic[0];
+            var id =  $scope.topicId;
+            
+            $scope.list = response.data;
+            $scope.pageTopic = response.data.filter(function(item){
+                if (item._id === id) {
+                    return item;
+                }
+            });
+            
+            $scope.pageTopic = $scope.pageTopic[0];
 
         });
         
         $scope.postComment = function(item){
-            
             
             item.author = $scope.user;
             item.authorImg = $scope.userImg;
@@ -181,7 +178,6 @@
                     
                 }, item, item.topicId);
                 
-                
                 $scope.newTopic = {};
                 
                 } else {
@@ -191,10 +187,11 @@
             }
             item = {};
             
+            
+            
             //reload the page after post -- could also attach $scope.getTopics to this somehow. NEED A NEW ONE
-            window.location.reload();
-            
-            
+            // window.location.reload();
+
         };
         
         
