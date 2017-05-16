@@ -1,8 +1,8 @@
 {
-  "name": "treehouse-express-auth",
+  "name": "Arda-Boards",
   "version": "1.0.0",
-  "description": "A project for learning how to add authentication to a web application.",
-  "author": "Treehouse Island, Inc.",
+  "description": "A server, api and site devoted to discussing J.R.R. Tolkien's fantasy world.",
+  "author": "Will Bjorn",
   "private": true,
   "scripts": {
     "start": "node ./app"

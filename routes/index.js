@@ -151,10 +151,7 @@ router.post('/register', function(req, res, next) {
         err.status = 400; //error for malformed syntax and other Bad Requests.
         return next(err);
       }
-
-  
 });
-
 
 // GET /
 router.get('/', function(req, res, next) {
@@ -280,6 +277,22 @@ router.post('/api/photo',function(req,res){
         console.log("file uploaded");
         return res.redirect('/profile');
     });
+});
+
+router.get('/barad-dur', function(req, res, next) {
+   if (!req.session.userId) {
+      return res.redirect('/login');
+   } else {
+     
+   User.findById(req.session.userId)
+      .exec(function (error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          return res.render('barad-dur-search', { title: 'Barad-dûr', name: user.username, favoriteChar: user.favoriteCharacter,profileImage: user.profileImage });
+        }
+      });
+   }
 });
 
 
