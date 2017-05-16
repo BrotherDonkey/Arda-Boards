@@ -64,6 +64,13 @@ block content
                       
                       p(ng-model="newComment.author") Comment posted by <strong>{{newComment.author}}</strong>
                       input(class="btn btn-primary" type="submit" value="Submit")
+                div(id="accordion" role="tablist" aria-multiselectable="true").m-t-1
+                  div.card
+                    div(class="card-header" role="tab" id="headingOne")
+                      h5.mb-0
+                        a(data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne") Comments
+                    div(id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne")
+                      div.card-block Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
                 div(ng-repeat="comment in item.comments").m-y-1.card-footer.card.card-block
                   // p.text-success {{comment.votes}} votes
                     a
