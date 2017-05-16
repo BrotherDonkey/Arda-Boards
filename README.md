@@ -9,15 +9,15 @@ Arda, soon to be a welcoming community for fantasy-lit lovers, is also pretty ME
 The trek to Mordor didn't happen in a day.
 
 #### General Todos
-[x] Connect POST routes to individual topics (singleTopic.pug)
-[ ] Connect voting API to comments on /rivendell and singleTopic.pug.
-[ ] Connect DELETE routes to front end.
-[ ] Connect PUT routes to front end.
-[ ] Created voting verification system
-    - Array of trimmed userIDs, binary search to verify.
-[ ] Find a better way to update state without reloading.
-[ ] Expand user schema and profile to include more information.
-[ ] Create routes to user profiles via /:username.
+- [x] Connect POST routes to individual topics (singleTopic.pug)
+- [ ] Connect voting API to comments on /rivendell and singleTopic.pug.
+- [ ] Connect DELETE routes to front end.
+- [ ] Connect PUT routes to front end.
+- [ ] Created voting verification system
+- [ ] ^ Array of trimmed userIDs, binary search to verify.
+- [ ] Find a better way to update state without reloading.
+- [ ] Expand user schema and profile to include more information.
+- [ ] Create routes to user profiles via /:username.
 
 
 #### Possible bugs:
