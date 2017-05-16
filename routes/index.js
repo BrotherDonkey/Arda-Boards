@@ -70,11 +70,6 @@ router.get('/logout', function(req, res, next) {
     }
 });
 
-// GET /form -- JUST FOR FORM EXPERIMENTATION
-router.get('/form', mid.loggedOut, function(req, res, next) {
-    return res.render('textareaexp', {title: 'Fuckin \'round'});
-});
-
 // GET /login
 router.get('/login', mid.loggedOut, function(req, res, next) {
     return res.render('login', {title: 'Log In'});
@@ -88,7 +83,7 @@ router.post('/login', function(req, res, next) {
       //authetnicates user via users.js file
       User.authenticate(req.body.username, req.body.password, function(error, user){
         if (error || !user ) {
-          var err = new Error('Wrong email or password.');
+          var err = new Error('Wrong username or password.');
           err.status = 401;
           return next(err);
         } else {

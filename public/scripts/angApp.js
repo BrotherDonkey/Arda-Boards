@@ -185,12 +185,11 @@
                 error = "Form incomlete";
                 console.error(error);
             }
+            
             item = {};
             
-            
-            
             //reload the page after post -- could also attach $scope.getTopics to this somehow. NEED A NEW ONE
-            // window.location.reload();
+            window.location.reload();
 
         };
         

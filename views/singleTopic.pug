@@ -34,12 +34,12 @@ block content
         .col-md-3
         .col-md-6
           p
-           a.btn.btn-primary(data-toggle="collapse" href="#showComments" aria-expanded="false" aria-controls="showComments") Show Comments
-            div(class="collapse" id="showComments")
+           a.btn.btn-primary(data-toggle="collapse" href="#showComments" aria-expanded="true" aria-controls="showComments") Hide/Show Comments
+            div(class="collapse in" id="showComments")
               div.card.card-block.text-muted
                 div
-                 a.btn.btn-primary(data-toggle="collapse" href="#addComment-{{pageTopic._id}}" aria-expanded="false" aria-controls="addComment-{{pageTopic._id}}" data-topicId="{{pageTopic._id}}") Add a new comment
-                div(id="addComment-{{pageTopic._id}}").collapse
+                 a.btn.btn-primary(data-toggle="collapse" href="#addComment-{{pageTopic._id}}" aria-expanded="true" aria-controls="addComment-{{pageTopic._id}}" data-topicId="{{pageTopic._id}}") Add a new comment
+                div(id="addComment-{{pageTopic._id}}" class="collapse" aria-expanded="false")
                  .card.card-block
                   form(ng-submit="postComment(newComment)" novalidate)
                     div.form-group
