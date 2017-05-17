@@ -10,6 +10,7 @@ The trek to Mordor didn't happen in a day.
 
 #### General Todos
 - [x] Connect POST routes to individual topics (singleTopic.pug)
+- [x] Create new page to search existing topics (Barad-dur).
 - [ ] Connect voting API to comments on /rivendell and singleTopic.pug.
 - [ ] Connect DELETE routes to front end.
 - [ ] Connect PUT routes to front end.
@@ -47,3 +48,6 @@ Great article on [integrating Angular into Pug](https://codepen.io/khilnani/pen/
 
 #### Mongoose Schema Type
 See [their docs](http://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
+
+#### Pagination with Angular1j
+See [Michael Bromley's old post on the subject](http://www.michaelbromley.co.uk/blog/108/paginate-almost-anything-in-angularjs#_section-asynchronous-server-side-paging)
