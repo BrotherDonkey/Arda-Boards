@@ -4,18 +4,17 @@ block content
   div(ng-app="ardaApp")
     .main.container.clearfix
       .row
-        .col-md-8.col-md-offset-2(ng-controller="TopicsController as topics")
-          h2 Barad-dûr.
+        .col-md-8.col-md-offset-2
+          h2.display-4 Barad-dûr.
           p.m-y-4 The flame-wreathed eye above the Dark Tower never closes, never rests, never sleeps. It is always searching for the one ring. 
           div
       div.row
         div.col-lg-2
         div.col-md-8.m-t-2
-          div.input-group
-            span.input-group-btn
-              button(type="button").btn.btn-default Go!
-            input(id="Barad-dur" type="text" placeholder="Search for...").form-control
-            ul.suggestions
-              li
-        div.col-lg-2
+      div.form-group.row
+       div.col-md-2
+       div.col-md-8
+        label(for="Barad-dur").col-2.col-form-label Search Topics
+        input(id="Barad-dur" class="form-control" type="search" placeholder="Search Topics").m-b-1
+      ul.suggestions
         script(src="/scripts/search.js" type="text/javascript")

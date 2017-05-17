@@ -11,7 +11,7 @@ fetch(endpoint)
     .then(blob => blob.json())
     .then(data => searchTopics.push(...data));
     
-console.log(searchTopics);
+// console.log("Search topics", searchTopics);
 
 //use map to concat title + /n + text (we will also need the ._id for the href later)
 
@@ -29,16 +29,21 @@ function displayMatches() {
     const matchArray = findMatches(this.value, searchTopics);
 
     const html = matchArray.map(topic => {
-      const regex = new RegExp(this.value, "gi");
-      const titleMatch = topic.title.replace(regex, `<span class="highlight">${this.value}</span>`);
-      const textMatch = topic.text.replace(regex, `<span class="highlight">${this.value}</span>`);
+       const regex = new RegExp(this.value, "gi");
+      const topicTitle = topic.title.replace(regex, `<span class="bg-success">${this.value}</span>`)
+       const topicText = topic.text.replace(regex, `<span class="bg-success">${this.value}</span>`)
 
-      return `
-      <li>
-        <span class="name">${titleMatch}</span>
-        <span class="name">${textMatch}</span>
-      </li>
-      `;
+       return `
+       <li class="card">
+          <div class="card-block m-y-1">
+            <a href="https://fdy-brotherdonkey.c9users.io/rivendell/${topic._id}">
+                <h4 class="card-title text-primary">${topicTitle}</h4>
+            </a>
+            <p class="card-text text-muted">${topicText}</span>
+            </p>
+          </div>
+        </li>
+       `;
     }).join('');
     suggestions.innerHTML = html;
 }
