@@ -179,7 +179,7 @@ router.get('/', function(req, res, next) {
 router.get('/about', function(req, res, next) {
   if (!req.session.userId) {
       var loggedIn = false;
-      return res.render('about', { title: 'Fan Art', loggedIn: loggedIn });
+      return res.render('about', { title: 'Fan Art'});
    } else {
      
    User.findById(req.session.userId)
@@ -280,11 +280,11 @@ router.post('/api/photo',function(req,res){
 });
 
 router.get('/barad-dur', function(req, res, next) {
-   if (!req.session.userId) {
+  if (!req.session.userId) {
       return res.redirect('/login');
-   } else {
+  } else {
      
-   User.findById(req.session.userId)
+  User.findById(req.session.userId)
       .exec(function (error, user) {
         if (error) {
           return next(error);
@@ -292,7 +292,7 @@ router.get('/barad-dur', function(req, res, next) {
           return res.render('barad-dur-search', { title: 'Barad-dûr', name: user.username, favoriteChar: user.favoriteCharacter,profileImage: user.profileImage });
         }
       });
-   }
+  }
 });
 
 

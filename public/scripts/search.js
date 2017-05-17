@@ -26,18 +26,21 @@ function findMatches(wordToMath, searchTopics) {
 
 
 function displayMatches() {
-    const match = findMatches(this.value, searchTopics);
+    const matchArray = findMatches(this.value, searchTopics);
 
     const html = matchArray.map(topic => {
-       return `
-       <li>
-        <span class="name">${topic.title}</span>
-        <span class="name">${topic.text}, ${topic._id}</span>
-       </li>
-       `;
+      const regex = new RegExp(this.value, "gi");
+      const titleMatch = topic.title.replace(regex, `<span class="highlight">${this.value}</span>`);
+      const textMatch = topic.text.replace(regex, `<span class="highlight">${this.value}</span>`);
+
+      return `
+      <li>
+        <span class="name">${titleMatch}</span>
+        <span class="name">${textMatch}</span>
+      </li>
+      `;
     }).join('');
     suggestions.innerHTML = html;
-    
 }
 
 
