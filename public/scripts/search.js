@@ -13,8 +13,6 @@ fetch(endpoint)
     .then(blob => blob.json())
     .then(data => searchTopics.push(...data));
     
-// console.log("Search topics", searchTopics);
-
 //use map to concat title + /n + text (we will also need the ._id for the href later)
 
 function findMatches(wordToMath, searchTopics) {

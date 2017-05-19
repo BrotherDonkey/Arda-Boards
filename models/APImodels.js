@@ -58,6 +58,13 @@ TopicSchema.pre("save", function(next){
     next();
 });
 
+TopicSchema.method("update", function(updates, callback){
+    // Object.assign
+    Object.assign(this, updates, {updatedAt: new Date()});
+    this.parent().save(callback);
+})//this will be the key to editing comment
+
+
 
 // TopicSchema.pre("save", function(next){this.dataKey.something()}); this is a basic pre save hook
 

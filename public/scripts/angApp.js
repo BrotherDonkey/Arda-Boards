@@ -3,7 +3,6 @@
 
     App.controller('TopicsController', function($http, $scope, apiService){
         
-        
         $scope.user = document.getElementById('profile-name').innerText;
        
        //getting authorImg src 
@@ -22,12 +21,26 @@
         
         
         
-        // FUNCTION FOR GET REQUESTS TO GET TOPICS
-        apiService.getTopics(function(response){
-                console.log(`${response.data.length} topics were gotten`);
-                $scope.list = response.data;
-        });
+        //     //WORK ON MONDAY
+        // // FUNCTION FOR GET REQUESTS TO GET TOPICS
+        // $scope.voteOrEdit = function(item){
+            
+        //     if (item.voted) {
+        //         //make sure this gets pushed to the current comment array doing it like this might not be a great idea, what if users do this at similar times?
+        //         //seems like it should be a db thing . . . o
+        //     }
+            
+        //     apiService.voteOrEdit(callback, data);
+            
+        // };
         
+        
+        apiService.getTopics(function(response){
+            console.log(`${response.data.length} topics were gotten`);
+            $scope.list = response.data;
+        });
+            
+
         
         
         
@@ -81,12 +94,14 @@
             
         };
         
+        
+        //DELETE SOON
         //post topic --see submit topic
-        $scope.postTopic = function(item){
-            apiService.postTopic(item);
+        // $scope.postTopic = function(item){
+        //     apiService.postTopic(item);
             
-            // newComment .topicId .author .text
-        };
+        //     // newComment .topicId .author .text
+        // };
         
         //delete comment
         $scope.deleteComment = function(item, $index){
@@ -103,6 +118,17 @@
     });//end app controller
     
     App.service('apiService', function($http){
+        
+        //PUT Route for Comments and Votes
+        this.voteOrEdit = function(callback){
+            var data = {};
+            data.voted = ["it worked", "really"]; //note must change figure this out later
+            $http.put("https://fdy-brotherdonkey.c9users.io/api-topics/", data)
+                .then(callback, function(err){
+                    if (err) console.log("damn! put request problem" + err);
+                });
+        }
+        
 
         // GET topics from api
         this.getTopics = function(callback){
