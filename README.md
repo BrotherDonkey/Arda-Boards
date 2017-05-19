@@ -50,4 +50,5 @@ Great article on [integrating Angular into Pug](https://codepen.io/khilnani/pen/
 See [their docs](http://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
 
 #### Pagination with Angular1j
+See [Khilnani's CodePen](https://codepen.io/khilnani/pen/qEWojX)
 See [Michael Bromley's old post on the subject](http://www.michaelbromley.co.uk/blog/108/paginate-almost-anything-in-angularjs#_section-asynchronous-server-side-paging)
